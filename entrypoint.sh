@@ -40,7 +40,8 @@ echo ${INPUT_PASSWORD} | docker login -u ${INPUT_USERNAME} --password-stdin dock
 
 # Set Local Variables
 shortSHA=$(echo "${GITHUB_SHA}" | cut -c1-12)
-BASE_NAME="docker.pkg.github.com/${GITHUB_REPOSITORY}/${INPUT_IMAGE_NAME}"
+lowercaseRepository=$(echo "$GITHUB_REPOSITORY" | awk '{print tolower($0)}')
+BASE_NAME="docker.pkg.github.com/${lowercaseRepository}/${INPUT_IMAGE_NAME}"
 SHA_NAME="${BASE_NAME}:${shortSHA}"
 
 # Add Arguments For Caching
