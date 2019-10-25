@@ -44,6 +44,10 @@ lowercaseRepository=$(echo "$GITHUB_REPOSITORY" | awk '{print tolower($0)}')
 BASE_NAME="docker.pkg.github.com/${lowercaseRepository}/${INPUT_IMAGE_NAME}"
 SHA_NAME="${BASE_NAME}:${shortSHA}"
 
+if [ "${INPUT_TAG}" != "" ]; then
+   SHA_NAME="${INPUT_TAG}"
+fi
+
 # Add Arguments For Caching
 BUILDPARAMS=""
 if [ "${INPUT_CACHE}" == "true" ]; then
